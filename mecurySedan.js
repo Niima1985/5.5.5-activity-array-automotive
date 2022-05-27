@@ -6,7 +6,7 @@ const vehicleModule = require("./vehicle")
 class Car extends vehicleModule {
     constructor(make, model, year, color, mileage) {
         super(make, model, year, color, mileage);
-	    // Add the properties listed in the properties chart
+        // Add the properties listed in the properties chart
         this.maxPassengers = 5;
         this.passenger = 0;
         this.numberOfWheels = 4;
@@ -20,15 +20,20 @@ class Car extends vehicleModule {
 
     loadPassenger(num) {
         if (this.passenger < this.maxPassengers) {
-        console.log(`${this.model} ${this.make} have no available seats to take all passengers `);
-            return this.passenger = true; 
+            if ((num + this.passenger) <= this.maxPassengers) {
+                this.passenger = num;
+                return this.passenger;
+            } else {
+                console.log(`${this.model} ${this.make} have no available seats to take all passengers `);
+            }
         } else {
             console.log(`${this.model} ${this.make} is full`);
             return this.passenger = false;
         }
     }
+
     start() {
-        if (this.fuel > 0) {            
+        if (this.fuel > 0) {
             console.log("Engine has started.");
             return this.started = true
         } else {
@@ -39,12 +44,12 @@ class Car extends vehicleModule {
 
     serviceTime(mileage) {
         if (this.mileage > 30000) {
-            console.log(`${this.model} need maintenance`) 
+            console.log(`${this.model} need maintenance`)
             return this.scheduleService = true;
         }
     }
-}
 
+}
 // this shows how to call from this module
 let myCar = new Car('mercury', 'sedan', '2002', 'white', 50000)
 
